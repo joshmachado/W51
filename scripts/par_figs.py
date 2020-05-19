@@ -1,3 +1,7 @@
+##############################################
+## CREATING PARAMETER MAP FIGURES FOR PAPER ##
+##############################################
+
 from astropy import units as u
 from astropy.wcs import WCS
 import pylab as pl
@@ -6,9 +10,12 @@ from astropy.utils.data import get_pkg_data_filename
 import numpy as np
 from matplotlib_scalebar.scalebar import ScaleBar
 
+###############################################
+####### Establishing file names & paths #######
+par_maps = "/Users/Josh/W51/data/par_maps.fits"
+###############################################
 
-
-cube = get_pkg_data_filename('par_maps.fits')
+cube = get_pkg_data_filename(par_maps)
 cube_hdu = fits.open(cube)[0]
 cube_wcs = WCS(cube_hdu.header)
 
@@ -29,7 +36,7 @@ pl.box(on=None)
 scalebar = ScaleBar(1.53)
 pl.gca().add_artist(scalebar)
 pl.title('Kinematic Temperature (K)', fontsize=18)
-pl.savefig('tkin.pdf')
+pl.savefig('/Users/Josh/W51/fig_products/tkin.pdf')
 pl.close()
 
 #tex
@@ -47,7 +54,7 @@ pl.box(on=None)
 scalebar = ScaleBar(1.53)
 pl.gca().add_artist(scalebar)
 pl.title('Excitation Temperature (K)', fontsize=18)
-pl.savefig('tex.pdf')
+pl.savefig('/Users/Josh/W51/fig_products/tex.pdf')
 pl.close()
 
 #column density
@@ -65,7 +72,7 @@ pl.box(on=None)
 scalebar = ScaleBar(1.53)
 pl.gca().add_artist(scalebar)
 pl.title('Column Density (log$_{10}$gm$^{-3}$)', fontsize=18)
-pl.savefig('col_density.pdf')
+pl.savefig('/Users/Josh/W51/fig_products/col_density.pdf')
 pl.close()
 
 #sigma
@@ -83,7 +90,7 @@ pl.box(on=None)
 scalebar = ScaleBar(1.53)
 pl.gca().add_artist(scalebar)
 pl.title('Line Width (km s$^{-1}$)', fontsize=18)
-pl.savefig('sigma.pdf')
+pl.savefig('/Users/Josh/W51/fig_products/sigma.pdf')
 pl.close()
 
 
@@ -102,7 +109,7 @@ pl.box(on=None)
 scalebar = ScaleBar(1.53)
 pl.gca().add_artist(scalebar)
 pl.title('Centroid Velocity (km s$^{-1}$)', fontsize=18)
-pl.savefig('centroid.pdf')
+pl.savefig('/Users/Josh/W51/fig_products/centroid.pdf')
 pl.close()
 
 

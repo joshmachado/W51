@@ -1,9 +1,19 @@
+#######################################################
+## CREATING PARAMETER DISTRIBUTION FIGURES FOR PAPER ##
+#######################################################
+
+
 import scipy as sp
 import pylab as pl
 import numpy as np
 from astropy.io import fits
 
-fitcube = fits.open('par_maps.fits')[0]
+
+#Establishing file names & paths
+par_maps = "/Users/Josh/W51/data/par_maps.fits"
+################################################
+
+fitcube = fits.open(par_maps)[0]
 
 #### Kinetic Temperature Histogram and Fitting ####
 tex = fitcube.data[0,:,:]
@@ -22,7 +32,6 @@ pl.xlabel('Kinetic Temperature (K)', fontsize=14)
 pl.ylabel('Counts', fontsize=14)
 pl.title('Kinetic Temperature Distribution', fontsize=18)
 pl.savefig('ktemp_hist.pdf')
-pl.show()
 
 #### Rotational Temperature Histogram and Fitting ####
 trot = fitcube.data[1,:,:]
@@ -39,7 +48,6 @@ pl.xlabel('Rotational Temperature (K)', fontsize=14)
 pl.ylabel('Counts', fontsize=14)
 pl.title('Rotational Temperature Distribution', fontsize=18)
 pl.savefig('rtemp_hist.pdf')
-pl.show()
 
 #### NH3 Column Density Histogram and Fitting ####
 colden = fitcube.data[2,:,:]
@@ -55,7 +63,6 @@ pl.xlabel('NH3 Column Density (g/cm^2)', fontsize=14)
 pl.ylabel('Counts', fontsize=14)
 pl.title('NH$_3$ Column Density Distribution', fontsize=18)
 pl.savefig('colden_hist.pdf')
-pl.show()
 
 #### Line Width Histogram and Fitting ####
 linewidth = fitcube.data[3,:,:]
@@ -71,7 +78,6 @@ pl.xlabel('Line Width (km/s)', fontsize=14)
 pl.ylabel('Counts', fontsize=14)
 pl.title('Line Width Distribution', fontsize=18)
 pl.savefig('sigma_hist.pdf')
-pl.show()
 
 #### Centroid Velocity Histogram and Fitting ####
 centroid = fitcube.data[4,:,:]
@@ -86,4 +92,4 @@ pl.xlabel('Centroid Velocity (km/s)', fontsize=14)
 pl.ylabel('Counts', fontsize=14)
 pl.title('Centroid Velocity Distribution', fontsize=18)
 pl.savefig('vel_hist.pdf')
-pl.show()
+
