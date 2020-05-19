@@ -1,7 +1,11 @@
+##############################################
+## CREATING PARAMETER MAP FIGURES FOR PAPER ##
+## TRYING THIS WITH APLPY TO FIX SCALE BAR  ##
+##############################################
+
+
 import aplpy
 from astropy.io import fits
-
-
 from astropy import units as u
 from astropy.wcs import WCS
 import pylab as pl
