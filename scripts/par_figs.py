@@ -12,7 +12,7 @@ from matplotlib_scalebar.scalebar import ScaleBar
 
 ###############################################
 ####### Establishing file names & paths #######
-par_maps = "/Users/Josh/W51/data/par_maps.fits"
+par_maps = '/Users/Josh/W51/data/par_maps.fits'
 ###############################################
 
 cube = get_pkg_data_filename(par_maps)
