@@ -16,13 +16,13 @@ from matplotlib_scalebar.scalebar import ScaleBar
 
 
 
-pars = 'par_maps.fits'
+pars = '/Users/Josh/W51/data/par_maps.fits'
 cube = fits.open(pars)[0]
 
 
 
 #tkin
-tkin = aplpy.FITSFigure(cube.data[0,:,:], dimensions=[0,:,:])
+tkin = aplpy.FITSFigure(cube.data[0,:,:])
 tkin.show_colorscale(cmap='plasma', vmin=20,vmax=140)
 tkin.add_colorbar()
 tkin.colorbar.set_axis_label_font(size=16)
