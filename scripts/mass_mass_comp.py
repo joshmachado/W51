@@ -1,4 +1,4 @@
-###COMPARING MASS VS. AMMONIA DERIVED KINETIC TEMPERATURES###
+### MASS V MASS ###
 
 from astropy.table import Table
 import numpy as np
@@ -10,13 +10,6 @@ import pylab as pl
 catalog = Table.read('/Users/Josh/W51/data/coldnh3_catalog.tex')
 dendrocat = Table.read('/Users/Josh/W51/data/dendro_catalog.tex')
 
-###Non dendro ktemps
-ktemps = np.array(catalog['KTemp'])
-ktemps = ktemps[1:len(ktemps)].astype('float64')
-
-###Dendro KTemps
-dendrokt = np.array(dendrocat['KTemps'])
-dendrokt = dendrokt[1:len(dendrokt)].astype('float64')
 
 ###Constant temperature derived masses
 const_mass = np.array(catalog['peak_mass'])
@@ -38,17 +31,14 @@ tdendro = tdendro[1:len(tdendro)].astype('float64')
 ammon_dendro = np.array(dendrocat['mass'])
 ammon_dendro = ammon_dendro[1:len(ammon_dendro)].astype('float64')
 
-pl.plot(dendrokt, dendromass, '.', color='blue', label='Const. Temp Mass')
-pl.plot(dendrokt, ammon_dendro, '.', color='green', label='Ammonia Temp Mass')
-pl.xlabel('Kinetic Temperature (from Dendrocat)')
-pl.ylabel('Core Mass')
-#pl.xscale('log')
-pl.yscale('log')
-pl.legend()
-pl.show()
+#One to One line
+x = np.linspace(0,10000,10000)
+y = x
 
-#pl.plot(ktemps, dendromass, '.', color='red', label='Dendrogram Peak Cont Mass')
-#pl.plot(ktemps. tdendro, '.', color='purple', label='Dendrogram T Corrected Mass')
-#pl.xlabel('Kinetic Temperature')
-#pl.ylabel('Core Mass')
-#pl.show()
+pl.plot(x,y, '-r')
+pl.plot(ammon_dendro, dendromass, '.')
+pl.xlabel('Ammonia Temp Derived Core Mass')
+pl.ylabel('Flat Temp Derived Core Mass')
+pl.xscale('log')
+pl.yscale('log')
+pl.show()

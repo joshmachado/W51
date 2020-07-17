@@ -70,13 +70,13 @@ while i < len(t)-1:
 
     intensity = t[i]['cont_flux1p5arcsec'] * u.Jy
     intensity = intensity.to(u.erg/(u.cm**2))
-    intensity = intensity * u.erg / (u.cm)**2
+    #intensity = intensity * u.erg / (u.cm)**2
 
     
     #Populate Table with corresponding source KTemp
     KTemp[i] = ktemps
 
-    if float(ktemps) != 0.0:
+    if (float(ktemps) != 0.0)  and (float(ktemps) != 2.7315):
 
         #Units
         tempNH3 = ktemps * u.K
