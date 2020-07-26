@@ -7,16 +7,18 @@ import numpy as np
 from matplotlib_scalebar.scalebar import ScaleBar
 
 #Establishing file names & paths
-nh3_11 = "/Users/Josh/W51/data/nh3_11_m0.fits"
-par_maps = "/Users/Josh/W51/data/par_maps.fits"
+fp = '/Users/josh/GitHub/W51/'
+
+nh3_11 = fp+"data/nh3_11_m0.fits"
+par_maps = fp+"data/par_maps.fits"
 ################################################
 
 
-base = get_pkg_data_filename(nh3_11)
-base_hdu = fits.open(base)[0]
+#base = get_pkg_data_filename(nh3_11)
+base_hdu = fits.open(nh3_11)[0]
 base_wcs = WCS(base_hdu.header)
-cube = get_pkg_data_filename(par_maps)
-cube_hdu = fits.open(cube)[0]
+#cube = get_pkg_data_filename(par_maps)
+cube_hdu = fits.open(par_maps)[0]
 cube_wcs = WCS(cube_hdu.header)
 
 ax = pl.subplot(projection=base_wcs.celestial)

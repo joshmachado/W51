@@ -7,12 +7,12 @@ from astropy.wcs import WCS
 from astropy import constants as const
 import numpy as np
 
-
+fp = '/Users/josh/GitHub/W51/'
 
 #Retrieve source data
-t = Table.read('/Users/Josh/W51/data/coldnh3_catalog.tex')
-temp_cube = fits.open('/Users/Josh/W51/data/par_maps.fits')[0]
-flux_cube = fits.open('/Users/Josh/W51/data/W51_te_continuum_best_noise.fits')[0]
+t = Table.read(fp+'data/coldnh3_catalog.tex')
+temp_cube = fits.open(fp+'data/par_maps.fits')[0]
+flux_cube = fits.open(fp+'data/W51_te_continuum_best_noise.fits')[0]
 flux_wcs = WCS(flux_cube.header)
 
 
@@ -106,4 +106,5 @@ t['Sigma_g'] = Sigma_g
 t['mass'] = mass
 t['mass_uncertainty'] = mass_uncertainty
 
-t.write('coldnh3_catalog.tex', format='latex', overwrite=True)
+t.write(fp+'data/coldnh3_catalog.tex', format='latex', overwrite=True)
+

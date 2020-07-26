@@ -6,9 +6,10 @@ import pylab as pl
 
 
 ###Comparing mass derived from constant temperature assumption
+fp = '/Users/josh/GitHub/W51/'
 
-catalog = Table.read('/Users/Josh/W51/data/coldnh3_catalog.tex')
-dendrocat = Table.read('/Users/Josh/W51/data/dendro_catalog.tex')
+catalog = Table.read(fp+'data/coldnh3_catalog.tex')
+dendrocat = Table.read(fp+'data/dendro_catalog.tex')
 
 
 ###Constant temperature derived masses

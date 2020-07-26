@@ -6,9 +6,10 @@ import pylab as pl
 
 
 ###Comparing mass derived from constant temperature assumption
+fp = '/Users/josh/GitHub/W51/'
 
-catalog = Table.read('/Users/Josh/W51/data/coldnh3_catalog.tex')
-dendrocat = Table.read('/Users/Josh/W51/data/dendro_catalog.tex')
+catalog = Table.read(fp+'data/coldnh3_catalog.tex')
+dendrocat = Table.read(fp+'data/dendro_catalog.tex')
 
 ###Non dendro ktemps
 ktemps = np.array(catalog['KTemp'])
@@ -40,7 +41,7 @@ ammon_dendro = ammon_dendro[1:len(ammon_dendro)].astype('float64')
 
 pl.plot(dendrokt, dendromass, '.', color='blue', label='Const. Temp Mass')
 pl.plot(dendrokt, ammon_dendro, '.', color='green', label='Ammonia Temp Mass')
-pl.xlabel('Kinetic Temperature (from Dendrocat)')
+pl.xlabel('Kinetic Temperature')
 pl.ylabel('Core Mass')
 #pl.xscale('log')
 pl.yscale('log')

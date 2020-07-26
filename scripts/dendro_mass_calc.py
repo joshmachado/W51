@@ -8,15 +8,15 @@ from astropy import constants as const
 import numpy as np
 
 
-
+fp = '/Users/josh/GitHub/W51/'
 ###Retrieve source data###
 
 # Dendrogram Catalog of Sources from Ginsburg et. al 2016
-t = Table.read('/Users/Josh/W51/data/dendro_merge_continuum_and_line.ipac', format='ascii.ipac')
+t = Table.read(fp+'data/dendro_merge_continuum_and_line.ipac', format='ascii.ipac')
 # Temperature map derived from VLA D config NH3 observations and pyspeckit fitting
-temp_cube = fits.open('/Users/Josh/W51/data/par_maps.fits')[0]
+temp_cube = fits.open(fp+'data/par_maps.fits')[0]
 wcs = WCS(temp_cube.header)
-flux_cube = fits.open('/Users/Josh/W51/data/W51_te_continuum_best_noise.fits')[0]
+flux_cube = fits.open(fp+'data/W51_te_continuum_best_noise.fits')[0]
 flux_wcs = WCS(flux_cube.header)
 
 
@@ -68,7 +68,7 @@ while i < len(t)-1:
 
     #Units
 
-    intensity = t[i]['cont_flux1p5arcsec'] * u.Jy
+    intensity = t[i]['peak_cont_flux'] * u.Jy
     intensity = intensity.to(u.erg/(u.cm**2))
     #intensity = intensity * u.erg / (u.cm)**2
 
@@ -131,6 +131,6 @@ t['Sigma_g'] = Sigma_g
 t['mass'] = mass
 t['mass_uncertainty'] = mass_uncertainty
 
-t.write('/Users/Josh/W51/data/dendro_catalog.tex', format='latex', overwrite=True)
+t.write(fp+'data/dendro_catalog.tex', format='latex', overwrite=True)
 
 

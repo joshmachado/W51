@@ -6,13 +6,13 @@ from astropy.wcs import WCS
 from astropy import constants as const
 import numpy as np
 
-
+fp = '/Users/josh/GitHub/W51/'
 
 #Retrieve source data
-t = Table.read('/Users/Josh/W51/data/coldnh3_catalog.tex')
-temp_cube = fits.open('/Users/Josh/W51/data/cold_par_maps.fits')[0]
+t = Table.read(fp+'data/coldnh3_catalog.tex')
+temp_cube = fits.open(fp+'data/cold_par_maps.fits')[0]
 wcs = WCS(temp_cube.header)
-flux_cube = fits.open('/Users/Josh/W51/data/W51_te_continuum_best_noise.fits')[0]
+flux_cube = fits.open(fp+'data/W51_te_continuum_best_noise.fits')[0]
 flux_wcs = WCS(flux_cube.header)
 
 #Housekeeping
@@ -119,6 +119,6 @@ while i<len(t)-1:
     i+=1
     
 t['cold_mass'] = mass
-t.write('coldnh3_catalog_appended.tex', format='latex', overwrite=True)
+t.write(fp+'data/coldnh3_catalog_appended.tex', format='latex', overwrite=True)
 
 
