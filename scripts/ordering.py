@@ -32,16 +32,11 @@ x[1] = fluxes
 x[2] = temps
 x[3] = masses
 
-
-##Sorting by mass instead of flux
-y = np.sort(x)
-
-##Check to make sure sorting worked (mass arrays should be different - false)
-comp = masses == y[3]
-eq_arr = comp.all()
-print(eq_arr) #Want false! That means arrays are not equal, and have been sorted
+z = np.argsort(x)
+# z[3] # this is the index order of masses low to high
 
 ##See if indecies changes
-comp = index == y[0]
+comp = index == z[3]
 eq_arr = comp.all()
 print(eq_arr) #True means that the index does not change when sorted by flux or mass
+# FALSE. z[3] is the index order when sorted by mass
