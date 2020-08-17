@@ -109,9 +109,10 @@ while i < len(t)-1:
 
 #Update table
 t['mean nh3 mass'] = mass
-
+i=0
 #Determining mass & uncertainties based off of MEDIAN NH3 derived temperature
-mass = [None] * len(t)
+masses = [None] * len(t)
+Sigma = [None] * len(t)
 while i < len(t)-1:
     if float(t['KTemp'][i+1]) > 2.9:
 
@@ -139,11 +140,11 @@ while i < len(t)-1:
         #Compute surface density & mass
             #Sigma_g = intensity * c^2/(2*k*T*kgas) * (nu^-2) * (nu/nu0)^-beta
 
-        Sigma_g[i+1] = float(t['beam_area'][i+1])**-1 * (intensity)*(c**2)*((2*k.cgs*tempNH3*kgas)**(-1))*((nu.cgs)**(-2))*((nu/nu0)**(-beta))
+        Sigma[i+1] = float(t['beam_area'][i+1])**-1 * (intensity)*(c**2)*((2*k.cgs*tempNH3*kgas)**(-1))*((nu.cgs)**(-2))*((nu/nu0)**(-beta))
 
             #mass  = Sigma_g * beam_area * d^2 / Msun
             
-        mass[i+1] = (Sigma_g[i+1] * float(t['beam_area'][i+1]) * (5.41*u.kpc.to(u.cm))**2 / (u.Msun.to(u.g))).value
+        masses[i+1] = (Sigma[i+1] * float(t['beam_area'][i+1]) * (5.41*u.kpc.to(u.cm))**2 / (u.Msun.to(u.g))).value
 
         #Compute uncertainties
 
@@ -173,13 +174,13 @@ while i < len(t)-1:
         #mass_uncertainty = sqrt(dmdi^2 * flux_uncertainty^2 + dmdT^2 * temp_uncertainty^2)
         mass_uncertainty[i+1] = (((dmdT**2)*temp_uncertainty[i+1]**2 + (dmdi**2)*flux_uncertainty[i+1]**2))**(0.5)
     else: #For no data
-        Sigma_g[i+1] = 0
-        mass[i+1] = 0
+        Sigma[i+1] = 0
+        masses[i+1] = 0
         mass_uncertainty[i+1] = 0
     i += 1
 
 #Update table
-t['median nh3 mass'] = mass
+t['median nh3 mass'] = masses
 
 t.write(fp+'data/byeye_catalog.tex', format='latex', overwrite=True)
 

@@ -12,17 +12,23 @@ from scipy.optimize import curve_fit
 ###
 
 ###By-eye catalog
-cat = Table.read('/Users/josh/GitHub/W51/data/coldnh3_catalog.tex')
+cat = Table.read('/Users/josh/GitHub/W51/data/byeye_catalog.tex')
+#MEAN: 54K
+#MEDIAN: 47K
+
 ###Dendrogram catalog
 dendrocat = Table.read('/Users/josh/GitHub/W51/data/dendro_catalog.tex')
+dendrocat_mean_med = Table.read('/Users/josh/GitHub/W51/data/dendro_catalog_mean_med.tex')
+#MEAN: 66K
+#MEDIAN: 53K
 
 ###
 #Identifying datasets
 ###
 
-###By-eye Flat Temperature Assumption (20K)
-const_mass = cat['peak_mass']
-const_mass = const_mass[1:len(cat['peak_mass'])]
+###By-eye Flat Temperature Assumption (MEAN MASS)
+const_mass = cat['median nh3 mass']
+const_mass = const_mass[1:len(cat['median nh3 mass'])]
 const_mass = np.asarray(const_mass).astype(float)
 const_mass = np.sort(const_mass)
 const_mass = np.trim_zeros(const_mass)
@@ -35,8 +41,9 @@ nh3mass = np.sort(nh3mass)
 nh3mass = np.trim_zeros(nh3mass)
 
 ###Dendrogram Flat Temperature Assumption (20K)
-const_dendro = dendrocat['peak_cont_mass']
-const_dendro = const_dendro[1:len(dendrocat['peak_cont_mass'])]
+const_dendro = dendrocat_mean_med['median nh3 mass']
+const_dendro = const_dendro[1:len(dendrocat_mean_med['median nh3 mass'])]
+const_dendro = const_dendro[const_dendro != 'None'] 
 const_dendro = np.asarray(const_dendro).astype(float)
 const_dendro = np.sort(const_dendro)
 const_dendro = np.trim_zeros(const_dendro)
@@ -86,9 +93,9 @@ pl_flat_den_alpha = fit3.power_law.alpha
 pl_nh3_den_alpha = fit4.power_law.alpha
 
 ###Plot CDF
-pl.plot(np.log10(np.sort(const_mass)),np.log10(np.linspace(1,0,len(const_mass), endpoint=False)), label=r'By-eye Flat Temp., $\alpha$ = -{:0.4f}'.format(pl_flat_alpha))
+pl.plot(np.log10(np.sort(const_mass)),np.log10(np.linspace(1,0,len(const_mass), endpoint=False)), label=r'By-eye Median Flat Temp. (47K), $\alpha$ = -{:0.4f}'.format(pl_flat_alpha))
 pl.plot(np.log10(np.sort(nh3mass)),np.log10(np.linspace(1,0,len(nh3mass), endpoint=False)), label=r'By-eye NH3 Temp., $\alpha$ = -{:0.4f}'.format(pl_nh3_alpha))
-pl.plot(np.log10(np.sort(const_dendro)),np.log10(np.linspace(1,0,len(const_dendro), endpoint=False)), label=r'Dendrogram Flat Temp., $\alpha$ = -{:0.4f}'.format(pl_flat_den_alpha))
+pl.plot(np.log10(np.sort(const_dendro)),np.log10(np.linspace(1,0,len(const_dendro), endpoint=False)), label=r'Dendrogram Median Flat Temp. (53K), $\alpha$ = -{:0.4f}'.format(pl_flat_den_alpha))
 pl.plot(np.log10(np.sort(nh3dendro)),np.log10(np.linspace(1,0,len(nh3dendro), endpoint=False)), label=r'Dendrogram NH3 Temp., $\alpha$ = -{:0.4f}'.format(pl_nh3_den_alpha))
 
 #Fit lines to cdf
@@ -104,5 +111,7 @@ pl.plot(np.log10(np.sort(nh3dendro)),np.log10(np.linspace(1,0,len(nh3dendro), en
 #pl.plot(x, (intercept)*x**(-gamma))
 
 pl.legend()
-pl.title('CDF of By-eye vs. Dendrogram for Flat 20K & Dynamic Temp')
+pl.title('CDF of By-eye vs. Dendrogram for MEDIAN Flat & Dynamic Temp')
 pl.show()
+
+
