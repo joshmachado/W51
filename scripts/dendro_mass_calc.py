@@ -12,7 +12,7 @@ fp = '/Users/josh/GitHub/W51/'
 ###Retrieve source data###
 
 # Dendrogram Catalog of Sources from Ginsburg et. al 2016
-t = Table.read(fp+'data/dendro_merge_continuum_and_line.ipac', format='ascii.ipac')
+ t = Table.read(fp+'data/dendro_merge_continuum_and_line.ipac', format='ascii.ipac')
 # Temperature map derived from VLA D config NH3 observations and pyspeckit fitting
 temp_cube = fits.open(fp+'data/par_maps.fits')[0]
 wcs = WCS(temp_cube.header)

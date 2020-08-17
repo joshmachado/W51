@@ -62,6 +62,7 @@ def fitalinetocdf(masses):
     alpha_est = -gamma +  1
     return  alpha_est    
 
+###Fit Line to CDF alpha & gamma values
 flat_alpha = fitalinetocdf(const_mass)
 nh3_eye_alpha = fitalinetocdf(nh3mass)
 flat_dendro_alpha = fitalinetocdf(const_dendro)
@@ -73,12 +74,34 @@ flat_dendro_gamma = -flat_dendro_alpha+1
 nh3_dendro_gamma = -nh3_dendro_alpha+1
 
 
-###Plot CDF
-pl.plot(np.log10(np.sort(const_mass)),np.log10(np.linspace(1,0,len(const_mass), endpoint=False)), label=r'By-eye Flat Temp., $\alpha$ = -1.6432')
-pl.plot(np.log10(np.sort(nh3mass)),np.log10(np.linspace(1,0,len(nh3mass), endpoint=False)), label=r'By-eye NH3 Temp., $\alpha$ = -1.6752')
-pl.plot(np.log10(np.sort(const_dendro)),np.log10(np.linspace(1,0,len(const_dendro), endpoint=False)), label=r'Dendrogram Flat Temp., $\alpha$ = -1.9365')
-pl.plot(np.log10(np.sort(nh3dendro)),np.log10(np.linspace(1,0,len(nh3dendro), endpoint=False)), label=r'Dendrogram NH3 Temp., $\alpha$ = -2.0763')
+###Powerlaw alpha values
+fit1 = powerlaw.Fit(const_mass)
+fit2 = powerlaw.Fit(nh3mass)
+fit3 = powerlaw.Fit(const_dendro)
+fit4 = powerlaw.Fit(nh3dendro)
 
+pl_flat_alpha = fit1.power_law.alpha
+pl_nh3_alpha = fit2.power_law.alpha
+pl_flat_den_alpha = fit3.power_law.alpha
+pl_nh3_den_alpha = fit4.power_law.alpha
+
+###Plot CDF
+pl.plot(np.log10(np.sort(const_mass)),np.log10(np.linspace(1,0,len(const_mass), endpoint=False)), label=r'By-eye Flat Temp., $\alpha$ = -{:0.4f}'.format(pl_flat_alpha))
+pl.plot(np.log10(np.sort(nh3mass)),np.log10(np.linspace(1,0,len(nh3mass), endpoint=False)), label=r'By-eye NH3 Temp., $\alpha$ = -{:0.4f}'.format(pl_nh3_alpha))
+pl.plot(np.log10(np.sort(const_dendro)),np.log10(np.linspace(1,0,len(const_dendro), endpoint=False)), label=r'Dendrogram Flat Temp., $\alpha$ = -{:0.4f}'.format(pl_flat_den_alpha))
+pl.plot(np.log10(np.sort(nh3dendro)),np.log10(np.linspace(1,0,len(nh3dendro), endpoint=False)), label=r'Dendrogram NH3 Temp., $\alpha$ = -{:0.4f}'.format(pl_nh3_den_alpha))
+
+#Fit lines to cdf
+#intercept = 0.34281145
+#x = np.logspace(-1.5,.5, base=10)
+#gamma2 = -1.7934017965102476+1
+
+
+
+#pl.plot(x,flat_gamma*x+intercept, label=r'$\alpha$ = -1.7131')
+
+#pl.plot(x,gamma2*x+intercept+0.125, label=r'Bootstrapped $\alpha$ = -1.7934017965102476 ')
+#pl.plot(x, (intercept)*x**(-gamma))
 
 pl.legend()
 pl.title('CDF of By-eye vs. Dendrogram for Flat & Dynamic Temp')
