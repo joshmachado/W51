@@ -28,8 +28,8 @@ nh3mass = np.asarray(nh3mass).astype(float)
 
 
 ###By-eye Flat Temperature Assumption (20K)
-const_mass = cat['peak_mass']
-const_mass = const_mass[1:len(cat['peak_mass'])]
+const_mass = cat['20K nh3 mass']
+const_mass = const_mass[1:len(cat['20K nh3 mass'])]
 const_mass = np.asarray(const_mass).astype(float)
 const_mass = const_mass[nh3mass != 0] ##Removes all by-eye sources that don't have NH3 data
 const_mass = np.sort(const_mass)
@@ -46,17 +46,19 @@ nh3mass = np.trim_zeros(nh3mass)
 nh3dendro = dendrocat['mass']
 nh3dendro = nh3dendro[1:len(dendrocat['mass'])]
 nh3dendro = np.asarray(nh3dendro).astype(float)
-# This has to happen for the sake of line 52
+# This has to happen for the sake of line 55
 
 
 ###Dendrogram Flat Temperature Assumption (20K)
-const_dendro = dendrocat['peak_cont_mass']
-const_dendro = const_dendro[1:len(dendrocat['peak_cont_mass'])]
-const_dendro = np.asarray(const_dendro).astype(float)
+const_dendro = dendrocat['20K nh3 mass']
+const_dendro = const_dendro[1:len(dendrocat['20K nh3 mass'])]
 const_dendro = const_dendro[nh3dendro != 0] ##Removes all dendrocat sources that don't have NH3 data
+const_dendro = const_dendro[const_dendro != 'None']
+const_dendro = np.asarray(const_dendro).astype(float)
 const_dendro = np.sort(const_dendro)
 const_dendro = np.trim_zeros(const_dendro)
 const_dendro = const_dendro[~np.isnan(const_dendro)]
+
 
 
 ###Dendrogram Ammonia Temperature Derived Masses

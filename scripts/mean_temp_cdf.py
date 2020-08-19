@@ -18,7 +18,6 @@ cat = Table.read('/Users/josh/GitHub/W51/data/byeye_catalog.tex')
 
 ###Dendrogram catalog
 dendrocat = Table.read('/Users/josh/GitHub/W51/data/dendro_catalog.tex')
-dendrocat_mean_med = Table.read('/Users/josh/GitHub/W51/data/dendro_catalog_mean_med.tex')
 #MEAN: 66K
 #MEDIAN: 53K
 
@@ -56,8 +55,8 @@ nh3dendro = np.asarray(nh3dendro).astype(float)
 
 
 ###Dendrogram Flat Temperature Assumption (MEAN TEMP)
-const_dendro = dendrocat_mean_med['mean nh3 mass']
-const_dendro = const_dendro[1:len(dendrocat_mean_med['mean nh3 mass'])]
+const_dendro = dendrocat['mean nh3 mass']
+const_dendro = const_dendro[1:len(dendrocat['mean nh3 mass'])]
 const_dendro = np.asarray(const_dendro).astype(float)
 const_dendro = const_dendro[nh3dendro != 0] ##Removes all dendrocat sources that don't have NH3 data
 const_dendro = np.sort(const_dendro)

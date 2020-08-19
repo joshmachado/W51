@@ -11,7 +11,7 @@ import numpy as np
 fp = '/Users/josh/GitHub/W51/'
 
 #Retrieve source data
-t = Table.read(fp+'data/coldnh3_catalog.tex')
+t = Table.read(fp+'data/byeye_catalog.tex')
 temp_cube = fits.open(fp+'data/par_maps.fits')[0]
 flux_cube = fits.open(fp+'data/W51_te_continuum_best_noise.fits')[0]
 flux_wcs = WCS(flux_cube.header)

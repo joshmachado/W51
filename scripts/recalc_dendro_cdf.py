@@ -1,4 +1,4 @@
-### Reviewing how CDF changes between default catalog and recalculated 20K catalog ###
+### Reviewing how DENDRO CDF changes between default catalog and recalculated 20K catalog ###
 
 
 from astropy.table import Table
@@ -15,23 +15,24 @@ from scipy.optimize import curve_fit
 ###
 
 ###By-eye catalog
-cat = Table.read('/Users/josh/GitHub/W51/data/byeye_catalog.tex')
+cat = Table.read('/Users/josh/GitHub/W51/data/dendro_catalog.tex')
 
 ###
 #Identifying datasets
 ###
 
-###By-eye Ammmonia Temperature Derived Masses
+###Dendro Ammmonia Temperature Derived Masses
 nh3mass = cat['mass']
 nh3mass = nh3mass[1:len(cat['mass'])]
 nh3mass = np.asarray(nh3mass).astype(float)
 
 
-###By-eye Flat Temperature Assumption (20K) DEFAULT
-const_mass = cat['peak_mass']
-const_mass = const_mass[1:len(cat['peak_mass'])]
+###Dendro Flat Temperature Assumption (20K) DEFAULT
+const_mass = cat['peak_cont_mass']
+const_mass = const_mass[1:len(cat['peak_cont_mass'])]
+const_mass = np.array(const_mass[nh3mass != 0]) ##Removes all by-eye sources that don't have NH3 data
+
 const_mass = np.asarray(const_mass).astype(float)
-const_mass = const_mass[nh3mass != 0] ##Removes all by-eye sources that don't have NH3 data
 const_mass = np.sort(const_mass)
 const_mass = np.trim_zeros(const_mass)
 
@@ -39,8 +40,9 @@ const_mass = np.trim_zeros(const_mass)
 ###By-eye Flat Temperature Assumption (20K) RECALCULATED
 re_mass = cat['20K nh3 mass']
 re_mass = re_mass[1:len(cat['20K nh3 mass'])]
-re_mass = np.asarray(re_mass).astype(float)
 re_mass = re_mass[nh3mass != 0] ##Removes all by-eye sources that don't have NH3 data
+re_mass = re_mass[re_mass != 'None']
+re_mass = np.asarray(re_mass).astype(float)
 re_mass = np.sort(re_mass)
 re_mass = np.trim_zeros(re_mass)
 
@@ -89,5 +91,5 @@ pl.plot(np.log10(np.sort(re_mass)),np.log10(np.linspace(1,0,len(re_mass), endpoi
 #pl.plot(x, (intercept)*x**(-gamma))
 
 pl.legend()
-pl.title('CDF of Default Flat vs Recalc 20K Temp - By-Eye')
+pl.title('CDF of Default Flat vs Recalc 20K Temp - Dendrogram')
 pl.show()
