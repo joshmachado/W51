@@ -40,11 +40,11 @@ i = 0
 
 #Determining mean & median ktemps
 cat = Table.read(fp+'data/dendro_catalog.tex')
-ktemps = np.array(cat['KTemps'])
-ktemps = ktemps[1:len(ktemps)].astype('float64')
-ktemps = ktemps[ktemps>2.9]
-mean = np.mean(ktemps)
-median = np.median(ktemps)
+ktempss = np.array(cat['KTemps'])
+ktempss = ktempss[1:len(ktempss)].astype('float64')
+ktempss = ktempss[ktempss>2.9]
+mean = np.mean(ktempss)
+median = np.median(ktempss)
 
 flux_x = np.zeros(len(t))
 flux_y = np.zeros(len(t))
@@ -84,7 +84,7 @@ while i < len(t)-1:
 
     
     #Populate Table with corresponding source KTemp MEAN
-    KTemp[i] = mean
+    KTemp[i] = ktemps
 
     if (float(ktemps) != 0.0)  and (float(ktemps) != 2.7315):
 
@@ -173,7 +173,7 @@ while i < len(t)-1:
 
     
     #Populate Table with corresponding source KTemp MEDIAN
-    KTemp[i] = median
+    KTemp[i] = ktemps
 
     if (float(ktemps) != 0.0)  and (float(ktemps) != 2.7315):
 
@@ -263,7 +263,7 @@ while i < len(t)-1:
 
     
     #Populate Table with corresponding source KTemp MEDIAN
-    KTemp[i] = 20
+    KTemp[i] = ktemps
 
     if (float(ktemps) != 0.0)  and (float(ktemps) != 2.7315):
 

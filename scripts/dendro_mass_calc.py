@@ -35,6 +35,7 @@ mass = np.zeros(len(t))
 mass_uncertainty = np.zeros(len(t))
 temp_uncertainty = np.zeros(len(t))
 flux_uncertainty = np.zeros(len(t))
+position = [False] * len(t)
 i = 0
 
 
@@ -61,8 +62,9 @@ while i < len(t)-1:
     ### Some sources in dendrocat lie outside the temperature map. This eliminates sources outside VLA observations F.O.V. 
     if (flux_x[i] <300 and flux_y[i] < 300):
 
-
+        position[i] = True
         ktemps = temp_cube.data[0, int(pixcrd[1]), int(pixcrd[0])]
+
     else:
         ktemps = 0.0
 
@@ -130,7 +132,8 @@ t['KTemps'] = KTemp
 t['Sigma_g'] = Sigma_g
 t['mass'] = mass
 t['mass_uncertainty'] = mass_uncertainty
+t['KTemp uncertainty'] = temp_uncertainty
 
-t.write(fp+'data/dendro_catalog.tex', format='latex', overwrite=True)
+t.write(fp+'data/dendro_catalog1.tex', format='latex', overwrite=True)
 
 

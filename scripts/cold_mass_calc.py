@@ -10,7 +10,7 @@ import numpy as np
 fp = '/Users/josh/GitHub/W51/'
 
 #Retrieve source data
-t = Table.read(fp+'data/coldnh3_catalog.tex')
+t = Table.read(fp+'data/byeye_catalog.tex')
 temp_cube = fits.open(fp+'data/par_maps.fits')[0]
 flux_cube = fits.open(fp+'data/W51_te_continuum_best_noise.fits')[0]
 flux_wcs = WCS(flux_cube.header)
@@ -102,9 +102,11 @@ while i < len(t)-1:
     i += 1
 
 #Update table
-t['Sigma_g'] = Sigma_g
-t['mass'] = mass
-t['mass_uncertainty'] = mass_uncertainty
+#t['Sigma_g'] = Sigma_g
+#t['mass'] = mass
+#t['mass_uncertainty'] = mass_uncertainty
+t['KTemp uncertainty'] = temp_uncertainty
+t['flux uncertainty'] = flux_uncertainty
 
-t.write(fp+'data/coldnh3_catalog.tex', format='latex', overwrite=True)
+t.write(fp+'data/byeye_catalog.tex', format='latex', overwrite=True)
 
