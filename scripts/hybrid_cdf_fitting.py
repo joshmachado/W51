@@ -32,13 +32,13 @@ dendronh3mass = np.sort(dendronh3mass)
 
 ###### 2. Masses calculated with flat temp (mean)
 #By-eye Flat Temperature Assumption (Mean Temp)
-flat_mass = np.asarray(cat['mean nh3 mass'])
-flat_mass = flat_mass[1:len(cat['mean nh3 mass'])].astype(float)
+flat_mass = np.asarray(cat['mean (<80K) nh3 mass'])
+flat_mass = flat_mass[1:len(cat['mean (<80K) nh3 mass'])].astype(float)
 flat_mass = flat_mass[np.array(cat['mass'])[1:len(cat['mass'])].astype(float) != 0] #Removes all by-eye sources that don't have NH3 data
 flat_mass = np.sort(np.trim_zeros(flat_mass))
 #Dendrogram Flat Temperature Assumption (Mean Temp)
-flat_dendro = np.asarray(dendrocat['mean nh3 mass'])
-flat_dendro = flat_dendro[1:len(dendrocat['mean nh3 mass'])]
+flat_dendro = np.asarray(dendrocat['mean (<80K) nh3 mass'])
+flat_dendro = flat_dendro[1:len(dendrocat['mean (<80K) nh3 mass'])]
 selection = np.logical_and(np.array(dendrocat['mass'])[1:len(dendrocat['mass'])].astype(float) != 0, np.array(dendrocat['mass'])[1:len(dendrocat['mass'])].astype(float) != np.nan)
 flat_dendro = flat_dendro[selection] #Removes all dendrocat sources that don't have NH3 data
 flat_mass = np.sort(np.trim_zeros(flat_mass))
@@ -51,7 +51,7 @@ flat_dendro = np.sort(np.trim_zeros(flat_dendro))
 nh3temp = np.array(cat['KTemp'])[1:len(cat['KTemp'])].astype(float)
 nh3cores = np.array(cat['mass'][1:len(cat['mass'])].astype(float))
 hottest_cores = nh3cores[nh3temp > 80]
-flat_cores = np.array(cat['mean nh3 mass'][1:len(cat['mean nh3 mass'])].astype(float))
+flat_cores = np.array(cat['mean (<80K) nh3 mass'][1:len(cat['mean (<80K) nh3 mass'])].astype(float))
 flat_cores = flat_cores[np.array(cat['mass'])[1:len(cat['mass'])].astype(float) != 0] #Removes all by-eye sources that don't have NH3 data (MASSES)
 nh3temp = nh3temp[np.array(cat['mass'])[1:len(cat['mass'])].astype(float) != 0] #Removes all by-eye sources that don't have NH3 data (TEMPERATURES)
 flat_cores = flat_cores[nh3temp < 80]
@@ -60,7 +60,7 @@ byeye_hybrid = np.append(flat_cores, hottest_cores)
 dendro_nh3temp = np.array(dendrocat['KTemps'])[1:len(dendrocat['KTemps'])].astype(float)
 dendro_nh3cores = np.array(dendrocat['mass'][1:len(dendrocat['mass'])].astype(float))
 dendro_hottest_cores = dendro_nh3cores[dendro_nh3temp > 80]
-dendro_flat_cores = np.array(dendrocat['mean nh3 mass'][1:len(dendrocat['mean nh3 mass'])].astype(float))
+dendro_flat_cores = np.array(dendrocat['mean (<80K) nh3 mass'][1:len(dendrocat['mean (<80K) nh3 mass'])].astype(float))
 dendro_flat_cores = dendro_flat_cores[np.array(dendrocat['mass'])[1:len(dendrocat['mass'])].astype(float) != 0] #Removes all dendrocat sources that don't have NH3 data (MASSES)
 dendro_nh3temp = dendro_nh3temp[np.array(dendrocat['mass'])[1:len(dendrocat['mass'])].astype(float) != 0] #Removes all dendrocat sources that don't have NH3 data (TEMPERATURES)
 dendro_flat_cores = dendro_flat_cores[dendro_nh3temp < 80]
@@ -84,16 +84,16 @@ hybrid_alpha_dendro = fit6.power_law.alpha
 
 
 ###Plot CDF
-#pl.plot(np.log10(np.sort(nh3mass)),np.log10(np.linspace(1,0,len(nh3mass), endpoint=False)), label=r'By-eye NH3 Temp., $\alpha$ = -{:0.4f}'.format(nh3_alpha_eye))
-pl.plot(np.log10(np.sort(dendronh3mass)),np.log10(np.linspace(1,0,len(dendronh3mass), endpoint=False)), label=r'Dendrogram NH3 Temp., $\alpha$ = -{:0.4f}'.format(nh3_alpha_dendro))
-#pl.plot(np.log10(np.sort(flat_mass)),np.log10(np.linspace(1,0,len(flat_mass), endpoint=False)), label=r'By-eye Flat Mean Temp., $\alpha$ = -{:0.4f}'.format(flat_alpha_eye))
-pl.plot(np.log10(np.sort(flat_dendro)),np.log10(np.linspace(1,0,len(flat_dendro), endpoint=False)), label=r'Dendrogram Flat Mean Temp., $\alpha$ = -{:0.4f}'.format(flat_alpha_dendro))
-#pl.plot(np.log10(np.sort(byeye_hybrid)),np.log10(np.linspace(1,0,len(byeye_hybrid), endpoint=False)), label=r'By-eye "Hybrid" Temp., $\alpha$ = -{:0.4f}'.format(hybrid_alpha_eye))
-pl.plot(np.log10(np.sort(dendro_hybrid)),np.log10(np.linspace(1,0,len(dendro_hybrid), endpoint=False)), label=r'Dendrogram "Hybrid" Temp., $\alpha$ = -{:0.4f}'.format(hybrid_alpha_dendro))
+pl.plot(np.log10(np.sort(nh3mass)),np.log10(np.linspace(1,0,len(nh3mass), endpoint=False)), label=r'By-eye NH3 Temp., $\alpha$ = -{:0.4f} '.format(nh3_alpha_eye)+r'$\pm$ {:0.2f} '.format(fit1.power_law.sigma))
+#pl.plot(np.log10(np.sort(dendronh3mass)),np.log10(np.linspace(1,0,len(dendronh3mass), endpoint=False)), label=r'Dendrogram NH3 Temp., $\alpha$ = -{:0.4f}'.format(nh3_alpha_dendro)+r'$\pm$ {:0.2f} '.format(fit2.power_law.sigma))
+pl.plot(np.log10(np.sort(flat_mass)),np.log10(np.linspace(1,0,len(flat_mass), endpoint=False)), label=r'By-eye Flat Mean Temp., $\alpha$ = -{:0.4f}'.format(flat_alpha_eye)+r'$\pm$ {:0.2f} '.format(fit3.power_law.sigma))
+#pl.plot(np.log10(np.sort(flat_dendro)),np.log10(np.linspace(1,0,len(flat_dendro), endpoint=False)), label=r'Dendrogram Flat Mean Temp., $\alpha$ = -{:0.4f}'.format(flat_alpha_dendro)+r'$\pm$ {:0.2f} '.format(fit4.power_law.sigma))
+pl.plot(np.log10(np.sort(byeye_hybrid)),np.log10(np.linspace(1,0,len(byeye_hybrid), endpoint=False)), label=r'By-eye "Hybrid" Temp., $\alpha$ = -{:0.4f}'.format(hybrid_alpha_eye)+r'$\pm$ {:0.2f} '.format(fit5.power_law.sigma))
+#pl.plot(np.log10(np.sort(dendro_hybrid)),np.log10(np.linspace(1,0,len(dendro_hybrid), endpoint=False)), label=r'Dendrogram "Hybrid" Temp., $\alpha$ = -{:0.4f}'.format(hybrid_alpha_dendro)+r'$\pm$ {:0.2f} '.format(fit6.power_law.sigma))
 
 
 pl.legend()
-pl.title('CDF of Dendrogram for Mean Temp, NH3 Temp & "Hybrid"')
+pl.title('CDF of By-eye for Mean Temp, NH3 Temp & "Hybrid"')
 pl.show()
 
 

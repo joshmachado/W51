@@ -55,10 +55,11 @@ den_temps = den_temps[den_temps != 0]
 
 pl.plot(fluxes, temps, '.', alpha = 0.5, label='By-Eye Catalog')
 pl.errorbar(fluxes, temps, yerr=0.015, xerr=flux_unc, ls='none', alpha = 0.5)
-pl.plot(den_fluxes, den_temps, '.', alpha = 0.5, label='Dendrogram Catalog')
-pl.errorbar(den_fluxes, den_temps, yerr=dendro_temp_unc, xerr=dendro_flux_unc, capsize = 5, ls='none', alpha = 0.5)
+#pl.plot(den_fluxes, den_temps, '.', alpha = 0.5, label='Dendrogram Catalog')
+#pl.errorbar(den_fluxes, den_temps, yerr=dendro_temp_unc, xerr=dendro_flux_unc, capsize = 5, ls='none', alpha = 0.5)
 pl.xlabel('ALMA 1.3mm Flux (Jy)')
 pl.ylabel('NH3 Temperature (K)')
 pl.xscale('log')
 pl.legend()
+pl.title('1.3mm Flux vs. NH3 Temperature for By-Eye Sources')
 pl.show()

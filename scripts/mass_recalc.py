@@ -11,7 +11,7 @@ import numpy as np
 fp = '/Users/josh/GitHub/W51/'
 
 #Retrieve source data
-t = Table.read(fp+'data/coldnh3_catalog.tex')
+t = Table.read(fp+'data/byeye_catalog.tex')
 temp_cube = fits.open(fp+'data/par_maps.fits')[0]
 flux_cube = fits.open(fp+'data/W51_te_continuum_best_noise.fits')[0]
 flux_wcs = WCS(flux_cube.header)
@@ -36,6 +36,7 @@ i = 0
 ktemps = np.array(t['KTemp'])
 ktemps = ktemps[1:len(ktemps)].astype('float64')
 ktemps = ktemps[ktemps>2.9]
+ktemps = ktemps[ktemps<80]
 mean = np.mean(ktemps)
 median = np.median(ktemps)
 
@@ -108,7 +109,7 @@ while i < len(t)-1:
     i += 1
 
 #Update table
-t['mean nh3 mass'] = mass
+t['mean (<80K) nh3 mass'] = mass
 i=0
 #Determining mass & uncertainties based off of MEDIAN NH3 derived temperature
 masses = [None] * len(t)
@@ -180,7 +181,7 @@ while i < len(t)-1:
     i += 1
 
 #Update table
-t['median nh3 mass'] = masses
+t['median (<80K) nh3 mass'] = masses
 
 t.write(fp+'data/byeye_catalog.tex', format='latex', overwrite=True)
 

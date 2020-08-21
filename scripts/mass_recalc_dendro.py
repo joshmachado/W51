@@ -43,6 +43,7 @@ cat = Table.read(fp+'data/dendro_catalog.tex')
 ktempss = np.array(cat['KTemps'])
 ktempss = ktempss[1:len(ktempss)].astype('float64')
 ktempss = ktempss[ktempss>2.9]
+ktempss = ktempss[ktempss<80]
 mean = np.mean(ktempss)
 median = np.median(ktempss)
 
@@ -136,7 +137,7 @@ while i < len(t)-1:
     i += 1
 
 #Update table
-t['mean nh3 mass'] = mass
+t['mean (<80K) nh3 mass'] = mass
 i=0
 #Determining mass & uncertainties based off of MEDIAN NH3 derived temperature
 mass = [None] * len(t)
@@ -225,7 +226,7 @@ while i < len(t)-1:
     i += 1
 
 #Update table
-t['median nh3 mass'] = mass
+t['median (<80K) nh3 mass'] = mass
 
 i=0
 #Determining mass & uncertainties based off of 20K assumption
