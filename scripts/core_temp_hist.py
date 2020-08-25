@@ -17,9 +17,9 @@ byeye = byeye[1:len(byeye)].astype('float64')
 dendro = np.array(dendrocat['KTemps'])
 dendro = dendro[1:len(dendro)].astype('float64')
 
-binlist = [40, 80, 120]
-pl.hist(dendro,  bins = binlist, alpha=0.5, label='Dendrogram Sources')
-pl.hist(byeye,  bins = binlist, alpha=0.5, label='By-Eye Sources')
+binlist = np.array([np.arange(start=0, stop=140, step=10)])
+pl.hist(dendro,  bins = binlist[0], alpha=0.5, label='Dendrogram Sources')
+pl.hist(byeye,  bins = binlist[0], alpha=0.5, label='By-Eye Sources')
 
 
 pl.xlabel('Core Temperature (K)')
