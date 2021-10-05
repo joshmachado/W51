@@ -84,4 +84,4 @@ axScatter.set_ylabel('Ginsburg et al. 2017 Masses', fontsize='15')
 # pl.plot(x, x**1)
 
 pl.show()
-pl.savefig('../fig_products/mass_vs_ammoniamass.png', bbox_inches='tight')
+#pl.savefig('../fig_products/mass_vs_ammoniamass.png', bbox_inches='tight')

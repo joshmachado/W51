@@ -76,7 +76,7 @@ def fitalinetocdf(masses):
     popt,pcov = curve_fit(linearpoly, np.log10(np.sort(masses)),np.log10(np.linspace(1,0,len(masses),endpoint=False)))
     gamma = popt[0]
     alpha_est = -gamma +  1
-    return  alpha_est    
+    return  alpha_est
 
 ###Fit Line to CDF alpha & gamma values
 flat_alpha = fitalinetocdf(const_mass)
@@ -102,11 +102,15 @@ pl_flat_den_alpha = fit3.power_law.alpha
 pl_nh3_den_alpha = fit4.power_law.alpha
 
 ###Plot CDF
-pl.plot(np.log10(np.sort(const_mass)),np.log10(np.linspace(1,0,len(const_mass), endpoint=False)), label=r'By-eye Flat Temp., $\alpha$ = -{:0.4f}'.format(pl_flat_alpha))
-pl.plot(np.log10(np.sort(nh3mass)),np.log10(np.linspace(1,0,len(nh3mass), endpoint=False)), label=r'By-eye NH3 Temp., $\alpha$ = -{:0.4f}'.format(pl_nh3_alpha))
-pl.plot(np.log10(np.sort(const_dendro)),np.log10(np.linspace(1,0,len(const_dendro), endpoint=False)), label=r'Dendrogram Flat Temp., $\alpha$ = -{:0.4f}'.format(pl_flat_den_alpha))
-pl.plot(np.log10(np.sort(nh3dendro)),np.log10(np.linspace(1,0,len(nh3dendro), endpoint=False)), label=r'Dendrogram NH3 Temp., $\alpha$ = -{:0.4f}'.format(pl_nh3_den_alpha))
+pl.figure(figsize=(8,5),dpi=120)
+#pl.plot(np.log10(np.sort(const_mass)),np.log10(np.linspace(1,0,len(const_mass), endpoint=False)), label=r'By-eye Flat Temp., $\alpha$ = -{:0.4f}'.format(pl_flat_alpha))
+#pl.plot(np.log10(np.sort(nh3mass)),np.log10(np.linspace(1,0,len(nh3mass), endpoint=False)), label=r'By-eye NH3 Temp., $\alpha$ = -{:0.4f}'.format(pl_nh3_alpha))
+pl.plot(np.log10(np.sort(const_dendro)),np.log10(np.linspace(1,0,len(const_dendro), endpoint=False)), label=r'Dendrogram Flat Temp., $\alpha$ = -{:0.2f}'.format(pl_flat_den_alpha))
+pl.plot(np.log10(np.sort(nh3dendro)),np.log10(np.linspace(1,0,len(nh3dendro), endpoint=False)), label=r'Dendrogram NH3 Temp., $\alpha$ = -{:0.2f}'.format(pl_nh3_den_alpha))
 
+pl.rcParams['font.size'] = 16
+pl.xlabel(r'log($M_{\odot}$)')
+pl.ylabel('log(Prob)')
 #Fit lines to cdf
 #intercept = 0.34281145
 #x = np.logspace(-1.5,.5, base=10)
@@ -120,7 +124,5 @@ pl.plot(np.log10(np.sort(nh3dendro)),np.log10(np.linspace(1,0,len(nh3dendro), en
 #pl.plot(x, (intercept)*x**(-gamma))
 
 pl.legend()
-pl.title('CDF of By-eye vs. Dendrogram for Flat 20K & Dynamic Temp')
+pl.title('CDF for Flat 20K & Dynamic Temp')
 pl.show()
-
-

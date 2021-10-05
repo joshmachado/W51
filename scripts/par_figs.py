@@ -12,7 +12,7 @@ from matplotlib_scalebar.scalebar import ScaleBar
 
 ###############################################
 ####### Establishing file names & paths #######
-par_maps = '/Users/Josh/W51/data/par_maps.fits'
+par_maps = '/Users/josh/Github/W51/data/par_maps.fits'
 ###############################################
 
 cube = get_pkg_data_filename(par_maps)
@@ -35,8 +35,8 @@ cbar = pl.colorbar()
 pl.box(on=None)
 scalebar = ScaleBar(1.53)
 pl.gca().add_artist(scalebar)
-pl.title('Kinematic Temperature (K)', fontsize=18)
-pl.savefig('/Users/Josh/W51/fig_products/tkin.pdf')
+pl.title('Kinetic Temperature (K)', fontsize=18)
+pl.savefig('/Users/josh/Github/W51/fig_products/tkin.pdf')
 pl.close()
 
 #tex
@@ -54,7 +54,7 @@ pl.box(on=None)
 scalebar = ScaleBar(1.53)
 pl.gca().add_artist(scalebar)
 pl.title('Excitation Temperature (K)', fontsize=18)
-pl.savefig('/Users/Josh/W51/fig_products/tex.pdf')
+pl.savefig('/Users/josh/Github/W51/fig_products/tex.pdf')
 pl.close()
 
 #column density
@@ -72,7 +72,7 @@ pl.box(on=None)
 scalebar = ScaleBar(1.53)
 pl.gca().add_artist(scalebar)
 pl.title('Column Density (log$_{10}$gm$^{-3}$)', fontsize=18)
-pl.savefig('/Users/Josh/W51/fig_products/col_density.pdf')
+pl.savefig('/Users/josh/Github/W51/fig_products/col_density.pdf')
 pl.close()
 
 #sigma
@@ -90,7 +90,7 @@ pl.box(on=None)
 scalebar = ScaleBar(1.53)
 pl.gca().add_artist(scalebar)
 pl.title('Line Width (km s$^{-1}$)', fontsize=18)
-pl.savefig('/Users/Josh/W51/fig_products/sigma.pdf')
+pl.savefig('/Users/josh/Github/W51/fig_products/sigma.pdf')
 pl.close()
 
 
@@ -109,7 +109,5 @@ pl.box(on=None)
 scalebar = ScaleBar(1.53)
 pl.gca().add_artist(scalebar)
 pl.title('Centroid Velocity (km s$^{-1}$)', fontsize=18)
-pl.savefig('/Users/Josh/W51/fig_products/centroid.pdf')
+pl.savefig('/Users/josh/Github/W51/fig_products/centroid.pdf')
 pl.close()
-
-

@@ -11,12 +11,14 @@ dendrocat = Table.read(fp+'data/dendro_catalog.tex')
 ###By-eye Core Temps
 byeye = np.array(catalog['KTemp'])
 byeye = byeye[1:len(byeye)].astype('float64')
-
-
+byeye = np.trim_zeros(np.sort(byeye))
+byeye = byeye[byeye > 3]
 ###Dendrocat Core Temps
 dendro = np.array(dendrocat['KTemps'])
 dendro = dendro[1:len(dendro)].astype('float64')
-
+dendro = np.trim_zeros(np.sort(dendro))
+dendro = dendro[np.where(np.isnan(dendro) == False)]
+dendro = dendro[dendro > 3]
 binlist = np.array([np.arange(start=0, stop=140, step=10)])
 pl.hist(dendro,  bins = binlist[0], alpha=0.5, label='Dendrogram Sources')
 pl.hist(byeye,  bins = binlist[0], alpha=0.5, label='By-Eye Sources')

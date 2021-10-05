@@ -16,9 +16,9 @@ from matplotlib_scalebar.scalebar import ScaleBar
 
 
 
-pars = '/Users/Josh/W51/data/par_maps.fits'
+pars = '/Users/josh/GitHub/W51/data/par_maps.fits'
 cube = fits.open(pars)[0]
-
+cube_wcs = WCS(cube.header)
 
 
 #tkin
@@ -28,10 +28,10 @@ tkin.add_colorbar()
 tkin.colorbar.set_axis_label_font(size=16)
 tkin.colorbar.set_axis_label_text('K')
 tkin.colorbar.set_font(size=14)
-tkin.add_scalebar(0.015)
-tkin.scalebar.set_label('80pc')
-tkin.add_beam()
-tkin.set_title('Kinematic Temperature')
+#tkin.add_scalebar(0.015)
+#tkin.scalebar.set_label('80pc')
+#tkin.add_beam()
+tkin.set_title('Kinetic Temperature')
 tkin.axis_labels.set_font(size=19)
 tkin.tick_labels.set_font(size=14)
 
@@ -45,13 +45,13 @@ ax.coords[1].set_ticks_visible(False)
 ax.coords[0].set_ticklabel_visible(False)
 ax.coords[1].set_ticklabel_visible(False)
 ax.set_axis_off
-pl.imshow(cube_hdu.data[0,:,:], origin='lower', cmap='plasma', vmin=20, vmax=140)
+pl.imshow(cube.data[0,:,:], origin='lower', cmap='plasma', vmin=20, vmax=140)
 cbar = pl.colorbar()
 #cbar.ax.set_ylabel('K', rotation=0)
 pl.box(on=None)
 scalebar = ScaleBar(1.53)
 pl.gca().add_artist(scalebar)
-pl.title('Kinematic Temperature (K)', fontsize=18)
+pl.title('Kinetic Temperature (K)', fontsize=18)
 pl.savefig('tkin.pdf')
 pl.close()
 
